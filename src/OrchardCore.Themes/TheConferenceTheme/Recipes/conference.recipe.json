@@ -1,0 +1,1954 @@
+{
+  "name": "Conference",
+  "displayName": "Conference",
+  "description": "Provides a functional Conference with CMS features.",
+  "author": "The V Team",
+  "website": "http://Vproject.net",
+  "version": "1.0",
+  "issetuprecipe": true,
+  "categories": [ "default" ],
+  "tags": [ "blog" ],
+
+  // The variables are evaluated the first time they are accessed, and reused across steps
+  "variables": {
+    "blogContentItemId": "[js:uuid()]"
+    // "now": "[js: Date().toISOString()]"
+  },
+
+  "steps": [
+    {
+      "name": "feature",
+      "disable": [],
+      "enable": [
+        // SaaS
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Admin",
+        "OrchardCore.Diagnostics",
+        "OrchardCore.DynamicCache",
+        "OrchardCore.Features",
+        "OrchardCore.Navigation",
+        "OrchardCore.Recipes",
+        "OrchardCore.Resources",
+        "OrchardCore.Roles",
+        "OrchardCore.Settings",
+        "OrchardCore.Themes",
+        "OrchardCore.Users",
+
+        // Content Management
+        "OrchardCore.Alias",
+        "OrchardCore.Autoroute",
+        "OrchardCore.Html",
+        "OrchardCore.ContentFields",
+        "OrchardCore.ContentPreview",
+        "OrchardCore.Contents",
+        "OrchardCore.ContentTypes",
+        "OrchardCore.CustomSettings",
+        "OrchardCore.Deployment",
+        "OrchardCore.Deployment.Remote",
+        "OrchardCore.Feeds",
+        "OrchardCore.Flows",
+        "OrchardCore.Indexing",
+        "OrchardCore.Layers",
+        "OrchardCore.Lucene",
+        "OrchardCore.Lists",
+        "OrchardCore.Liquid",
+        "OrchardCore.Markdown",
+        "OrchardCore.Media",
+        "OrchardCore.Menu",
+        "OrchardCore.Queries",
+        "OrchardCore.Title",
+        "OrchardCore.Templates",
+        "OrchardCore.Widgets",
+
+        // Themes
+        "TheConferenceTheme",
+        "TheAdmin",
+        "SafeMode"
+      ]
+    },
+    {
+      "name": "themes",
+      "admin": "TheAdmin",
+      "site": "TheConferenceTheme"
+    },
+    {
+      "name": "settings",
+      "HomeRoute": {
+        "Action": "Display",
+        "Controller": "Item",
+        "Area": "OrchardCore.Contents",
+        "ContentItemId": "[js: variables('blogContentItemId')]"
+      },
+      "LayerSettings": {
+        "Zones": [ "Content", "Footer" ]
+      }
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "Menu",
+          "DisplayName": "Menu",
+          "Settings": {
+            "Draftable": "True",
+            "Versionable": "True",
+            "Creatable": "True",
+            "Listable": "True"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "Position": "2",
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                }
+              }
+            },
+            {
+              "PartName": "MenuPart",
+              "Name": "MenuPart",
+              "Settings": {
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "MenuItemsListPart",
+              "Name": "MenuItemsListPart",
+              "Settings": {
+                "Position": "4"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "LinkMenuItem",
+          "DisplayName": "Link Menu Item",
+          "Settings": {
+            "Stereotype": "MenuItem"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LinkMenuItemPart",
+              "Name": "LinkMenuItemPart",
+              "Settings": {}
+            }
+          ]
+        },
+        {
+          "Name": "LiquidPage",
+          "DisplayName": "Liquid Page",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "False",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LiquidPage",
+              "Name": "LiquidPage",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Pattern": "{{ ContentItem | display_text | slugify }}",
+                "AllowCustomPath": "True",
+                "ShowHomepageOption": "True",
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "LiquidPart",
+              "Name": "LiquidPart",
+              "Settings": {
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Paragraph",
+          "DisplayName": "Paragraph",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "False",
+            "Securable": "True",
+            "Stereotype": "Widget"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Paragraph",
+              "Name": "Paragraph",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "City",
+          "DisplayName": "City",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "City",
+              "Name": "City",
+              "Settings": {
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Rooms",
+              "Settings": {
+                "DisplayName": "Rooms",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "Room"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Days",
+              "Settings": {
+                "DisplayName": "Days",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "ConferenceDay"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Questionnaires",
+              "Settings": {
+                "DisplayName": "Questionnaires",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "Questionnaire"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "4"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Speaker",
+          "DisplayName": "Speaker",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Speaker",
+              "Name": "Speaker",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Room",
+          "DisplayName": "Room",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Room",
+              "Name": "Room",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "SlotBindings",
+              "Settings": {
+                "DisplayName": "Slot Bindings",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "SlotBinding"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Session",
+          "DisplayName": "Session",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Session",
+              "Name": "Session",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "RawHtml",
+          "DisplayName": "Raw Html",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "False",
+            "Securable": "True",
+            "Stereotype": "Widget"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "RawHtml",
+              "Name": "RawHtml",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Page",
+          "DisplayName": "Page",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Page",
+              "Name": "Page",
+              "Settings": {
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "Position": "1",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Pattern": "{{ ContentItem | display_text | slugify }}",
+                "AllowCustomPath": "True",
+                "ShowHomepageOption": "True"
+              }
+            },
+            {
+              "PartName": "FlowPart",
+              "Name": "FlowPart",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Schedule",
+          "DisplayName": "Schedule",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Schedule",
+              "Name": "Schedule",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Slots",
+              "Settings": {
+                "DisplayName": "Slots",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "Slot"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Slot",
+          "DisplayName": "Slot",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Slot",
+              "Name": "Slot",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SponsorLevel",
+          "DisplayName": "Sponsor Level",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "False",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "SponsorLevel",
+              "Name": "SponsorLevel",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem.SponsorLevel.Name.Text | slugify }}",
+             
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Sponsor",
+          "DisplayName": "Sponsor",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Sponsor",
+              "Name": "Sponsor",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem.ContentItemId }}{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentIndexSettings": {},
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "ConferenceDay",
+          "DisplayName": "Conference Day",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "ConferenceDay",
+              "Name": "ConferenceDay",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentIndexSettings": {},
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Question",
+          "DisplayName": "Question",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Question",
+              "Name": "Question",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {},
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true
+                },
+                "Position": "1"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0",
+                "ContentIndexSettings": {}
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Questionnaire",
+          "DisplayName": "Questionnaire",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Questionnaire",
+              "Name": "Questionnaire",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Questions",
+              "Settings": {
+                "DisplayName": "Questions",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "Question"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "3"
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentIndexSettings": {},
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentIndexSettings": {},
+                "Position": "3"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "FeedBackItem",
+          "DisplayName": "FeedBack Item",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "FeedBackItem",
+              "Name": "FeedBackItem",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "FeedBack",
+          "DisplayName": "Feedback",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "FeedBack",
+              "Name": "FeedBack",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "BagPart",
+              "Name": "Answers",
+              "Settings": {
+                "DisplayName": "Answers",
+                "Description": "Provides a collection behavior for your content item.",
+                "ContainedContentTypes": [
+                  "FeedBackItem"
+                ],
+                "DisplayType": null,
+                "ContentIndexSettings": {},
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SlotBinding",
+          "DisplayName": "Slot Binding",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "SlotBinding",
+              "Name": "SlotBinding",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "QuestionnaireBinding",
+          "DisplayName": "Questionnaire Binding",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "QuestionnaireBinding",
+              "Name": "QuestionnaireBinding",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "AliasPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a way to define custom aliases for content items."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "AutoroutePart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a custom url for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "FlowPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a customizable body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "BagPart",
+          "Settings": {
+            "Attachable": "True",
+            "Reusable": "True",
+            "Description": "Provides a collection behavior for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "WidgetsListPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a way to add widgets per content items."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "HtmlBodyPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides an HTML Body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "ListPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Add a list behavior."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "MarkdownBodyPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Markdown formatted body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "CommonPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides an editor for the common properties of a content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "LiquidPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Liquid formatted body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "TitlePart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Title for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "City",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MarkdownField",
+              "Name": "Description",
+              "Settings": {
+                "DisplayName": "Description",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Hint": "Description",
+                "Editor": "Wysiwyg",
+                "Position": "2"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "Address",
+              "Settings": {
+                "DisplayName": "Address",
+                "Hint": null,
+                "Editor": "TextArea",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "SponsorId",
+              "Settings": {
+                "DisplayName": "Sponsor",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Speaker",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MarkdownField",
+              "Name": "Description",
+              "Settings": {
+                "DisplayName": "Description",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Hint": null,
+                "Editor": null,
+                "Position": "2"
+              }
+            },
+            {
+              "FieldName": "LinkField",
+              "Name": "PhotoUrl",
+              "Settings": {
+                "DisplayName": "Photo Url",
+                "Hint": null,
+                "HintLinkText": null,
+                "Required": false,
+                "LinkTextMode": 0,
+                "UrlPlaceholder": null,
+                "TextPlaceholder": null,
+                "DefaultUrl": null,
+                "DefaultText": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Room",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MarkdownField",
+              "Name": "Description",
+              "Settings": {
+                "DisplayName": "Description",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Hint": null,
+                "Editor": "Wysiwyg",
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Session",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MarkdownField",
+              "Name": "Description",
+              "Settings": {
+                "DisplayName": "Description",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Hint": null,
+                "Editor": null,
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "SpeakerId",
+              "Settings": {
+                "DisplayName": "Speaker",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Paragraph",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Content",
+              "Settings": {
+                "DisplayName": "Content",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false
+                },
+                "Hint": null,
+                "Editor": "Wysiwyg",
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "RawHtml",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Content",
+              "Settings": {
+                "DisplayName": "Content",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false
+                },
+                "Hint": null,
+                "Editor": "Multiline",
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Schedule",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TimeField",
+              "Name": "Close",
+              "Settings": {
+                "DisplayName": "Close",
+                "Hint": null,
+                "Editor": null,
+                "Required": false,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TimeField",
+              "Name": "Open",
+              "Settings": {
+                "DisplayName": "Open",
+                "Hint": null,
+                "Editor": null,
+                "Required": false,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Slot",
+          "Settings": {
+            "Attachable": "True",
+            "Reusable": "True",
+            "Description": null,
+            "DisplayName": null
+          },
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TimeField",
+              "Name": "Start",
+              "Settings": {
+                "DisplayName": "Start",
+                "Hint": "Time start",
+                "Editor": null,
+                "Required": false,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SponsorLevel",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Name",
+              "Settings": {
+                "DisplayName": "Name",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Sponsor",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "LinkField",
+              "Name": "LogoUrl",
+              "Settings": {
+                "DisplayName": "Logo Url",
+                "Hint": null,
+                "HintLinkText": null,
+                "Required": false,
+                "LinkTextMode": 0,
+                "UrlPlaceholder": null,
+                "TextPlaceholder": null,
+                "DefaultUrl": null,
+                "DefaultText": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "SponsorLevelId",
+              "Settings": {
+                "DisplayName": "Sponsor Level",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "ConferenceDay",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "DateField",
+              "Name": "Date",
+              "Settings": {
+                "DisplayName": "Date",
+                "Hint": null,
+                "Editor": null,
+                "Required": false,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "ScheduleId",
+              "Settings": {
+                "DisplayName": "Schedule",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Question",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Answers",
+              "Settings": {
+                "DisplayName": "Answers",
+                "Hint": null,
+                "Editor": "TextArea",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "Text",
+              "Settings": {
+                "DisplayName": "Text",
+                "Hint": null,
+                "Editor": "TextArea",
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "FeedBackItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Answers",
+              "Settings": {
+                "DisplayName": "Answers",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "QuestionId",
+              "Settings": {
+                "DisplayName": "Question",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SlotBinding",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "ConferenceDayId",
+              "Settings": {
+                "DisplayName": "Conference Day",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "SessionId",
+              "Settings": {
+                "DisplayName": "Session",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "2"
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "SlotId",
+              "Settings": {
+                "DisplayName": "Slot",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": true,
+                  "Stored": true,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Questionnaire",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "QuestionId",
+              "Settings": {
+                "DisplayName": "Question",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "QuestionnaireBinding",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "QuestionnaireId",
+              "Settings": {
+                "DisplayName": "Questionnaire",
+                "Hint": null,
+                "Editor": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Position": "0"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // Create the indices before the content items so they are indexed automatically.
+      "name": "lucene-index",
+      "Indices": [ "Search" ]
+    },
+    {
+      "name": "content",
+      "Data": [
+        {
+          "ContentType": "City",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "City": {
+            "Description": {
+              "Markdown": "City test Description."
+            },
+            "Address": {
+              "Text": "Evreiska street 3"
+            },
+            "SponsorId": {
+              "Text": "sponsor-test"
+            }
+          },
+          "Rooms": {
+            "ContentItems": [
+              {
+                "ContentType": "Room",
+                "ContentItemId": "[js: uuid()]",
+                "ContentItemVersionId": "[js: uuid()]",
+                "Latest": false,
+                "Published": false,
+                "Owner": "[js: parameters('AdminUsername')]",
+                "Author": "[js: parameters('AdminUsername')]",
+                "Room": {
+                  "Description": {
+                    "Markdown": "Red room description."
+                  }
+                },
+                "AliasPart": {
+                  "Alias": "room-red"
+                },
+                "SlotBindings": {
+                  "ContentItems": [
+                    {
+                      "ContentType": "SlotBinding",
+                      "ContentItemId": "[js: uuid()]",
+                      "ContentItemVersionId": "[js: uuid()]",
+                      "Latest": false,
+                      "Published": false,
+                      "Owner": "[js: parameters('AdminUsername')]",
+                      "Author": "[js: parameters('AdminUsername')]",
+                      "SlotBinding": {
+                        "ConferenceDayId": {
+                          "Text": "conference-day-test"
+                        },
+                        "SessionId": {
+                          "Text": "session-test"
+                        },
+                        "SlotId": {
+                          "Text": "slot-test"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "TitlePart": {
+                  "Title": "Room red"
+                }
+              }
+            ]
+          },
+          "Days": {
+            "ContentItems": [
+              {
+                "ContentType": "ConferenceDay",
+                "ContentItemId": "[js: uuid()]",
+                "ContentItemVersionId": "[js: uuid()]",
+                "Latest": false,
+                "Published": false,
+                "Owner": "[js: parameters('AdminUsername')]",
+                "Author": "[js: parameters('AdminUsername')]",
+                "ConferenceDay": {
+                  "Date": {
+                    "Value": "2018-09-01T00:00:00Z"
+                  },
+                  "ScheduleId": {
+                    "Text": "Schedule id"
+                  }
+                },
+                "AliasPart": {
+                  "Alias": "Conference-day-test"
+                },
+                "TitlePart": {
+                  "Title": "Conference day test"
+                }
+              }
+            ]
+          },
+          "TitlePart": {
+            "Title": "Odessa"
+          },
+          "Questionnaires": {
+            "ContentItems": [
+              {
+                "ContentType": "Questionnaire",
+                "ContentItemId": "[js: uuid()]",
+                "ContentItemVersionId": "[js: uuid()]",
+                "Latest": false,
+                "Published": false,
+                "Owner": "[js: parameters('AdminUsername')]",
+                "Author": "[js: parameters('AdminUsername')]",
+                "Questionnaire": {
+                  "QuestionId": {
+                    "Text": "Question test"
+                  }
+                },
+                "Questions": {
+                  "ContentItems": [
+                    {
+                      "ContentType": "Question",
+                      "ContentItemId": "[js: uuid()]",
+                      "ContentItemVersionId": "[js: uuid()]",
+                      "Latest": false,
+                      "Published": false,
+                      "Owner": "[js: parameters('AdminUsername')]",
+                      "Author": "[js: parameters('AdminUsername')]",
+                      "Question": {
+                        "Answers": {
+                          "Text": "Answers test"
+                        },
+                        "Text": {
+                          "Text": "Test"
+                        }
+                      },
+                      "AliasPart": {
+                        "Alias": "question-test"
+                      },
+                      "TitlePart": {
+                        "Title": "Question test"
+                      }
+                    }
+                  ]
+                },
+                "TitlePart": {
+                  "Title": "Questionnari test"
+                },
+                "AliasPart": {
+                  "Alias": "questionnari-test"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentType": "FeedBack",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "FeedBack": {},
+          "Answers": {
+            "ContentItems": [
+              {
+                "ContentType": "FeedBackItem",
+                "ContentItemId": "[js: uuid()]",
+                "ContentItemVersionId": "[js: uuid()]",
+                "Latest": false,
+                "Published": false,
+                "Owner": "[js: parameters('AdminUsername')]",
+                "Author": "[js: parameters('AdminUsername')]",
+                "FeedBackItem": {
+                  "Answers": {
+                    "Text": "answers-test"
+                  },
+                  "QuestionId": {
+                    "Text": "question-test"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentType": "Schedule",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Schedule": {
+            "Close": { "Value": "06:00:00" },
+            "Open": { "Value": "00:00:00" }
+          },
+          "Slots": {
+            "ContentItems": [
+              {
+                "ContentType": "Slot",
+                "ContentItemId": "[js: uuid()]",
+                "ContentItemVersionId": null,
+                "Latest": false,
+                "Published": false,
+                "Owner": "[js: parameters('AdminUsername')]",
+                "Author": "[js: parameters('AdminUsername')]",
+                "Slot": { "Start": { "Value": "00:00:00" } },
+                "AliasPart": { "Alias": "slot-test" },
+                "TitlePart": { "Title": "Slot test" }
+              }
+            ]
+          },
+          "AliasPart": { "Alias": "schedule-test" },
+          "TitlePart": { "Title": "Schedule test" }
+        },
+        {
+          "ContentType": "SponsorLevel",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "SponsorLevel": { "Name": { "Text": "Sponsor level test" } },
+          "AliasPart": { "Alias": "sponsor-level-test" }
+        },
+        {
+          "ContentType": "Speaker",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Speaker": {
+            "Description": { "Markdown": "Speaker description test" },
+            "PhotoUrl": {
+              "Url": "photo.png",
+              "Text": "Link text test"
+            }
+          },
+          "AliasPart": { "Alias": "speaker-test" },
+          "TitlePart": { "Title": "Speaker test" }
+        },
+        {
+          "ContentType": "Sponsor",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Sponsor": {
+            "LogoUrl": {
+              "Url": "logo.png",
+              "Text": "Link text test"
+            },
+            "SponsorLevelId": { "Text": "sponsor-level-test" }
+          },
+          "AliasPart": { "Alias": "Sponsor-test" },
+          "TitlePart": { "Title": "Sponsor test" }
+        },
+        {
+          "ContentType": "Session",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Session": {
+            "Description": { "Markdown": "Session description test" },
+            "SpeakerId": { "Text": "speaker-test" }
+          },
+          "TitlePart": { "Title": "Session test" },
+          "AliasPart": { "Alias": "session-test" }
+        },
+        {
+          "ContentType": "QuestionnaireBinding",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "QuestionnaireBinding": { "QuestionnaireId": { "Text": "questionnaire-test" } }
+        },
+        {
+          "ContentType": "SlotBinding",
+          "ContentItemId": "[js: uuid()]",
+          "ContentItemVersionId": "[js: uuid()]",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "SlotBinding": {
+            "ConferenceDayId": { "Text": "conference-day-test" },
+            "SessionId": { "Text": "session-test" },
+            "SlotId": { "Text": "slot-test" }
+          }
+        }
+      ]
+    },
+        {
+          "name": "layers",
+          "Layers": [
+            {
+              "Name": "Always",
+              "Rule": "true",
+              "Description": "The widgets in this layer are displayed on any page of this site."
+            },
+            {
+              "Name": "Homepage",
+              "Rule": "isHomepage()",
+              "Description": "The widgets in this layer are only displayed on the homepage."
+            }
+          ]
+        },
+        {
+          "name": "queries",
+          "Queries": [
+            {
+              "Source": "Lucene",
+              "Name": "RecentBlogPosts",
+              "Index": "Search",
+              "Template": "[js:base64('ew0KICAicXVlcnkiOiB7DQogICAgInRlcm0iIDogeyAiQ29udGVudC5Db250ZW50SXRlbS5Db250ZW50VHlwZSIgOiAiQmxvZ1Bvc3QiIH0gDQogIH0sDQogICJzb3J0IjogeyAiQ29udGVudC5Db250ZW50SXRlbS5DcmVhdGVkVXRjIjogeyAib3JkZXIiOiAiZGVzYyIgfSB9LA0KICAic2l6ZSI6IDMNCn0=')]",
+              "ReturnContentItems": true
+            }
+          ]
+        }
+      ]
+}
