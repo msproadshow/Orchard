@@ -1,18 +1,17 @@
 {
   "name": "Conference",
   "displayName": "Conference",
-  "description": "Provides a functional Conference with CMS features.",
-  "author": "The V Team",
-  "website": "http://Vproject.net",
+  "description": "Conference theme with CMS features.",
+  "author": "The Secret Circle Solutions",
+  "website": "https://scrtcrcl.com",
   "version": "1.0",
   "issetuprecipe": true,
   "categories": [ "default" ],
-  "tags": [ "blog" ],
+  "tags": [ "conference", "speakets", "sessions" ],
 
   // The variables are evaluated the first time they are accessed, and reused across steps
   "variables": {
     "blogContentItemId": "[js:uuid()]"
-    // "now": "[js: Date().toISOString()]"
   },
 
   "steps": [
@@ -33,6 +32,10 @@
         "OrchardCore.Settings",
         "OrchardCore.Themes",
         "OrchardCore.Users",
+
+        //test
+        "OrchardCore.OpenId",
+        "OrchardCore.OpenId.Client",
 
         // Content Management
         "OrchardCore.Alias",
@@ -70,6 +73,18 @@
       "name": "themes",
       "admin": "TheAdmin",
       "site": "TheConferenceTheme"
+    },
+    {
+      "name": "OpenIdClientSettings",
+      "Authority": "https://localhost:44300",
+      "DisplayName": "Registration Theme",
+      "ClientId": "openidtest",
+      "CallbackPath": "/signin-oidc",
+      "SignedOutCallbackPath": "/signout-callback-oidc",
+      "Scopes": "email phone",
+      "ResponseMode": "form_post",
+      "ResponseType": "code id_token",
+      "ClientSecret": "Passw0rd"
     },
     {
       "name": "settings",
@@ -631,8 +646,8 @@
               "Name": "AliasPart",
               "Settings": {
                 "AliasPartSettings": {
-                  "Pattern": "{{ ContentItem.SponsorLevel.Name.Text | slugify }}",
-             
+                  "Pattern": "{{ ContentItem.SponsorLevel.Name.Text | slugify }}"
+
                 },
                 "ContentIndexSettings": {
                   "Included": true,
@@ -1923,32 +1938,32 @@
         }
       ]
     },
+    {
+      "name": "layers",
+      "Layers": [
         {
-          "name": "layers",
-          "Layers": [
-            {
-              "Name": "Always",
-              "Rule": "true",
-              "Description": "The widgets in this layer are displayed on any page of this site."
-            },
-            {
-              "Name": "Homepage",
-              "Rule": "isHomepage()",
-              "Description": "The widgets in this layer are only displayed on the homepage."
-            }
-          ]
+          "Name": "Always",
+          "Rule": "true",
+          "Description": "The widgets in this layer are displayed on any page of this site."
         },
         {
-          "name": "queries",
-          "Queries": [
-            {
-              "Source": "Lucene",
-              "Name": "RecentBlogPosts",
-              "Index": "Search",
-              "Template": "[js:base64('ew0KICAicXVlcnkiOiB7DQogICAgInRlcm0iIDogeyAiQ29udGVudC5Db250ZW50SXRlbS5Db250ZW50VHlwZSIgOiAiQmxvZ1Bvc3QiIH0gDQogIH0sDQogICJzb3J0IjogeyAiQ29udGVudC5Db250ZW50SXRlbS5DcmVhdGVkVXRjIjogeyAib3JkZXIiOiAiZGVzYyIgfSB9LA0KICAic2l6ZSI6IDMNCn0=')]",
-              "ReturnContentItems": true
-            }
-          ]
+          "Name": "Homepage",
+          "Rule": "isHomepage()",
+          "Description": "The widgets in this layer are only displayed on the homepage."
         }
       ]
+    },
+    {
+      "name": "queries",
+      "Queries": [
+        {
+          "Source": "Lucene",
+          "Name": "RecentBlogPosts",
+          "Index": "Search",
+          "Template": "[js:base64('ew0KICAicXVlcnkiOiB7DQogICAgInRlcm0iIDogeyAiQ29udGVudC5Db250ZW50SXRlbS5Db250ZW50VHlwZSIgOiAiQmxvZ1Bvc3QiIH0gDQogIH0sDQogICJzb3J0IjogeyAiQ29udGVudC5Db250ZW50SXRlbS5DcmVhdGVkVXRjIjogeyAib3JkZXIiOiAiZGVzYyIgfSB9LA0KICAic2l6ZSI6IDMNCn0=')]",
+          "ReturnContentItems": true
+        }
+      ]
+    }
+  ]
 }

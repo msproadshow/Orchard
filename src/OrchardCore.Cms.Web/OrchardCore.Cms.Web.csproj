@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrchardCore.Themes\TheConferenceRegistrationTheme\TheConferenceRegistrationTheme.csproj" />
     <ProjectReference Include="..\OrchardCore.Themes\TheConferenceTheme\TheConferenceTheme.csproj" />
     <ProjectReference Include="..\OrchardCore\OrchardCore.Hosting.Console\OrchardCore.Hosting.Console.csproj" />
     <ProjectReference Include="..\OrchardCore\OrchardCore.Logging.NLog\OrchardCore.Logging.NLog.csproj" />
@@ -20,8 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
