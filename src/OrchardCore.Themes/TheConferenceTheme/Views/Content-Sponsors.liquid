@@ -1,0 +1,119 @@
+{% zone "Header" %}
+{{ Model.ContentItem.DisplayText}}
+{% endzone %}
+ <style>
+   a.imgdebag { /* Абзац с классом cite */
+    color: navy; /* Цвет текста */
+    margin-left: 20px; /* Отступ слева */
+    border-left: 1px solid navy; /* Граница слева от текста */
+    padding-left: 15px; /* Расстояние от линии до текста */
+   } 
+  </style>
+<section id="main-container" class="main-container">
+		<div class="container">
+			<div class="row text-center">
+				<h2 class="section-title">Supporting Our Project</h2>
+				<h3 class="section-sub-title">Event Sponsors</h3>
+			</div><!--/ Title row end -->
+				
+			<div class="row text-center">
+				<h3 class="sponsor-title">Platinum Sponsors</h3>
+                  {% for item in Model.ContentItem.Content.BagPart.ContentItems %}
+                   {%if item.Sponsor.SponsorLevelId.Text=="Platinum"%}
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="sponsor-details">
+						<a href="#"><!--/  ошибка с классом sponsor-logo-->
+							 <img class="img-responsive" src="{{item.Sponsor.LogoImage.Paths | asset_url}}" />
+						</a>
+						<div class="sponsor-info">
+                        
+							<h4 class="sponsor-name">{{item.DisplayText}}</h4>
+							<p>{{item.Sponsor.ShortInfo.Text}} </p>
+                             
+							<div class="sponsor-web-link">
+								<a href="{{item.Sponsor.SiteUrl.Url }}"><i class="fa fa-globe"></i></a>
+								<a href="{{item.Sponsor.FacebookUrl.Url }}"><i class="fa fa-facebook"></i></a>
+								<a href="{{item.Sponsor.TwitterUrl.Url }}"><i class="fa fa-twitter"></i></a>
+							</div>
+						</div><!-- Info end -->
+					</div><!-- Sponsor details -->
+				</div><!-- Col 1 end -->
+                  {% endif %}
+                {% endfor %}
+			</div><!--/ Content row 1 end -->
+
+			<div class="row text-center">
+				<h3 class="sponsor-title">Gold Sponsors</h3>
+                 {% for item in Model.ContentItem.Content.BagPart.ContentItems %}
+                   {%if item.Sponsor.SponsorLevelId.Text=="Gold"%}
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<div class="sponsor-details">
+						<a href="#">
+							<img class="img-responsive" src="{{item.Sponsor.LogoImage.Paths | asset_url}}" alt="" />
+						</a>
+						<div class="sponsor-info">
+							<h4 class="sponsor-name">{{item.DisplayText}}</h4>
+							<p>{{item.Sponsor.ShortInfo.Text}}</p>
+							<div class="sponsor-web-link">
+								<a href="{{item.Sponsor.SiteUrl.Url }}"><i class="fa fa-globe"></i></a>
+								<a href="{{item.Sponsor.TwitterUrl.Url }}"><i class="fa fa-twitter"></i></a>
+							</div>
+						</div><!-- Info end -->
+					</div><!-- Sponsor details -->
+				</div><!-- Col 2 end -->
+                 {% endif %}
+                {% endfor %}
+
+                </div><!--/ Content row 2 end -->
+                <div class="row text-center">
+				<h3 class="sponsor-title">Silver Sponsors</h3>
+                 {% for item in Model.ContentItem.Content.BagPart.ContentItems %}
+                   {%if item.Sponsor.SponsorLevelId.Text=="Silver"%}
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<div class="sponsor-details">
+						<a href="#">
+							<img class="img-responsive" src="{{item.Sponsor.LogoImage.Paths | asset_url}}" alt="" />
+						</a>
+						<div class="sponsor-info">
+							<h4 class="sponsor-name">{{item.DisplayText}}</h4>
+							<p>{{item.Sponsor.ShortInfo.Text}}</p>
+							<div class="sponsor-web-link">
+								<a href="{{item.Sponsor.SiteUrl.Url }}"><i class="fa fa-globe"></i></a>
+								<a href="{{item.Sponsor.TwitterUrl.Url }}"><i class="fa fa-twitter"></i></a>
+							</div>
+						</div><!-- Info end -->
+					</div><!-- Sponsor details -->
+				</div><!-- Col 1 end -->
+                 {% endif %}
+                {% endfor %}
+                </div><!--/ Content row 3 end -->
+
+	
+
+			<div class="row text-center">
+
+				<h3 class="sponsor-title">Creative Partners</h3>
+                 {% for item in Model.ContentItem.Content.BagPart.ContentItems %}
+                   {%if item.Sponsor.SponsorLevelId.Text=="Creative Partners"%}
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<div class="sponsor-details">
+						<a href="#">
+							<img class="img-responsive" src="{{item.Sponsor.LogoImage.Paths | asset_url}}" alt="" />
+						</a>
+						<div class="sponsor-info">
+							<h4 class="sponsor-name">{{item.DisplayText}}</h4>
+							<p>{{item.Sponsor.ShortInfo.Text}}</p>
+							<div class="sponsor-web-link">
+								<a href="{{item.Sponsor.SiteUrl.Url }}"><i class="fa fa-globe"></i></a>
+								<a href="{{item.Sponsor.TwitterUrl.Url }}"><i class="fa fa-twitter"></i></a>
+							</div>
+						</div><!-- Info end -->
+					</div><!-- Sponsor details -->
+				</div><!-- Col 1 end -->
+                  {% endif %}
+                {% endfor %}
+			</div><!--/ Content row 3 end -->		
+
+			</div><!-- Content row end -->
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->

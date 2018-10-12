@@ -1,0 +1,44 @@
+{% zone "Header" %}
+{{ Model.ContentItem.DisplayText}}
+{% endzone %}
+
+
+<section id="main-container" class="main-container">
+		<div class="container">
+
+			<div class="row text-center">
+				<h2 class="section-title">Revolutionizing the World</h2>
+				<h3 class="section-sub-title">Visionary Speakers</h3>
+			</div><!--/ Title row end -->
+
+			<div class="row text-center">
+            {% for item in Model.ContentItem.Content.BagPart.ContentItems %}
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="ts-speaker">
+						<div class="ts-speaker-image">
+							<img class="img-responsive" src="{{ item.Speaker.Photo.Paths | asset_url}}" alt="" />
+							<ul class="social-links">
+								<li><a href="{{ item.Speaker.InstagramUrl.Url}}"><i class="fa fa-instagram"></i></a></li>
+								<li><a href="{{ item.Speaker.LinkedinUrl.Url}}"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="{{ item.Speaker.FacebookUrl.Url}}"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="{{ item.Speaker.TwitterUrl.Url}}"><i class="fa fa-twitter"></i></a></li>
+							</ul>
+						</div><!--Image end -->
+						<div class="ts-speaker-info">
+                      
+							<h3 class="ts-speaker-name"><a href="#">{{item.Speaker.FullName.Text}}</a></h3>
+							<p class="ts-speaker-designation">{{item.Speaker.JobName.Text}}</p>
+						</div><!-- Info end -->
+					</div><!-- Speaker end -->
+				</div><!-- Speaker Col 1 end -->
+                  {% endfor %}
+                </div><!-- Content row 1 end -->
+               
+			<div class="gap-40"></div>
+
+			
+
+			</div><!-- Content row 2 end -->
+
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->

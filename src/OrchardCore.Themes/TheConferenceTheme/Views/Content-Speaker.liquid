@@ -1,0 +1,55 @@
+{% zone "Header" %}
+{{ Model.ContentItem.DisplayText}}
+{% endzone %}
+
+<body>
+
+	<div class="body-inner">
+
+	<section id="main-container" class="main-container">
+		<div class="container">
+			<div class="row">
+				<div class="clearfix">
+					<div class="col-xs-12 col-md-4">
+						<div class="ts-speaker-details">
+							<div class="ts-speaker-details-img">
+								<img class="img-responsive" src="{{ Model.ContentItem.Content.Speaker.Photo.Paths | asset_url }}" alt="" />
+								<ul class="ts-speaker-details-social">
+									<li><a href="{{ Model.ContentItem.Content.Speaker.FacebookUrl.Text}}"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="{{ Model.ContentItem.Content.Speaker.TwitterUrl.Text}}"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="{{ Model.ContentItem.Content.Speaker.InstagramUrl.Text}}"><i class="fa fa-instagram"></i></a></li>
+									<li><a href="{{ Model.ContentItem.Content.Speaker.LinkedinUrl.Text}}"><i class="fa fa-linkedin"></i></a></li>
+								</ul>
+							</div><!--Image end -->
+							<div class="ts-speaker-info">
+								<h3 class="ts-speaker-name">{{ Model.ContentItem.Content.Speaker.FullName.Text}}</h3>
+								<p class="ts-speaker-designation">{{ Model.ContentItem.Content.Speaker.JobName.Text}}</p>
+								<p><a href="{{ Model.ContentItem.Content.Speaker.JobUrl.Text}}">{{ Model.ContentItem.Content.Speaker.JobUrl.Text}}</a></p>
+								<p>{{ Model.ContentItem.Content.Speaker.ShortInfo.Text}}</p>
+                                <div class="col-xs-12 col-md-8">
+							
+					</div><!-- Col end -->
+							</div><!--Info end -->
+						</div><!--Image end -->
+					</div><!-- Col end -->
+
+					<div class="col-xs-12 col-md-8">
+							<div class="ts-speaker-session right">
+								<p>{{ Model.ContentItem.Content.Speaker.Description.Markdown| raw}}</p>
+							</div><!-- Session end -->
+					</div><!-- Col end -->
+				</div><!-- Speaker list 1 end -->
+			</div><!-- Speaker row 1 -->
+
+
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->
+
+
+
+
+
+	
+
+	</div><!-- Body inner end -->
+</body>

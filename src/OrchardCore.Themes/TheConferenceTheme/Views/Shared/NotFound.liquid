@@ -1,16 +1,27 @@
+
 {% zone "Header" %}
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="masthead" style="background-image: url('{{ "~/TheConferenceTheme/img/post-bg.jpg" | href }}')">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>{{ "Page Not Found" | t }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+404
 {% endzone %}
+
+<section id="main-container" class="main-container">
+	<div class="container">
+	
+		<div class="row">
+
+			<div class="error-page text-center">
+				<div class="error-code">
+					<h2><strong>404</strong></h2>
+				</div>
+				<div class="error-message">
+					<h3>Oops... Page Not Found!</h3>
+				</div>
+				<div class="error-body">
+					Try using the button below to go to main page of the site <br>
+					<a href="index.html" class="btn btn-primary">Back to Home Page</a>
+				</div>
+			</div>
+			
+		</div><!-- Content row -->
+	</div><!-- Container end -->
+</section><!-- Main container end -->
+

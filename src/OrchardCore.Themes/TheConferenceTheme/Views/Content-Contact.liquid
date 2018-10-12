@@ -1,0 +1,106 @@
+{% zone "Header" %}
+{{ Model.ContentItem.DisplayText}}
+{% endzone %}
+
+<section id="main-container" class="main-container">
+		<div class="container">
+
+			<div id="map" class="map"></div>
+
+			<div class="gap-60"></div>
+
+			<div class="row">
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+						<div class="sidebar sidebar-left">
+							<h3>Contact Us</h3>
+							<p>{{ Model.ContentItem.Content.Contact.Contactinfo.Text}}</p>
+
+							<div class="contact-info">
+								<div class="contact-info-box">
+									<i class="fa fa-map-marker">&nbsp;</i>
+									<div class="contact-info-box-content">
+										<h4>Address: </h4>
+										<p>{{ Model.ContentItem.Content.Contact.Address.Text}}</p>
+									</div>
+								</div>
+
+								<div class="contact-info-box">
+									<i class="fa fa-envelope-o">&nbsp;</i>
+									<div class="contact-info-box-content">
+										<h4>Email: </h4>
+										<p>{{ Model.ContentItem.Content.Contact.Email.Text}}</p>
+									</div>
+								</div>
+
+								<div class="contact-info-box">
+									<i class="fa fa-phone">&nbsp;</i>
+									<div class="contact-info-box-content">
+										<h4>Phone: </h4>
+										<p>{{ Model.ContentItem.Content.Contact.Phone.Text}} {{ Model.ContentItem.DisplayText }}</p>
+									</div>
+								</div>
+
+							</div><!-- contact info end -->
+						</div><!-- Sidebar left end -->
+					</div><!-- Sidebar col end -->
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	    			<h3>Contact Now</h3>
+	    			<form id="contact-form"  class="contact-form" action="contact-form.php" method="post">
+	    					<div class="error-container"></div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+									<input class="form-control form-control-name" placeholder="Name" name="name" id="name" type="text" required>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input class="form-control form-control-email" placeholder="Email" name="email" id="email" 
+										type="email" required>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input class="form-control form-control-subject" placeholder="Subject" name="subject" id="subject" required>
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<textarea class="form-control form-control-message" name="message" id="message" placeholder="Message" rows="8" required></textarea>
+							</div>
+							<div class="text-right"><br>
+								<button class="btn btn-primary btn-full" type="submit"><i class="fa fa-paper-plane-o"></i> Send Message</button> 
+							</div>
+						</form><!-- Contact form end -->
+	    		</div><!-- Col end -->
+			
+			</div><!-- Content row -->
+
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->
+
+    <!-- Javascript Files
+	================================================== -->
+
+	<!-- initialize jQuery Library -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.js"></script>
+	<!-- Bootstrap jQuery -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/bootstrap.min.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/waypoints.min.js"></script>
+	<!-- Color box -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.colorbox.js"></script>
+	<!-- Smoothscroll -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/smoothscroll.js"></script>
+	<!-- Google Map API Key-->
+	<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
+	<!-- Google Map Plugin-->
+	<script type="text/javascript" src="/TheConferenceTheme/js/gmap3.js"></script>
+	<!-- Template custom -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/custom.js"></script>

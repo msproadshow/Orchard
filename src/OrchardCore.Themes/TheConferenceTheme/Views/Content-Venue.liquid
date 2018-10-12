@@ -1,0 +1,113 @@
+{% zone "Header" %}
+{{ Model.ContentItem.DisplayText}}
+{% endzone %}
+
+
+<section id="main-container" class="main-container">
+		<div class="container">
+			<div class="row text-center">
+				<h2 class="section-title">Where to find us</h2>
+				<p class="section-sub-title">Venue &amp; Info</p>
+			</div><!--/ Title row end -->
+
+
+			<div class="row">
+				<div class="col-md-6">
+					<h3>Venue Details</h3>
+					<p>{{ Model.ContentItem.Content.Venue.VenueDetails.Text}}</p>
+
+					<div class="contact-info">
+						<div class="contact-info-box">
+							<i class="fa fa-map-marker">&nbsp;</i>
+							<div class="contact-info-box-content">
+								<h4>Address: </h4>
+								<p>{{  Model.ContentItem.Content.Venue.Address.Text}}</p>
+							</div>
+						</div>
+
+						<div class="contact-info-box">
+							<i class="fa fa-envelope-o">&nbsp;</i>
+							<div class="contact-info-box-content">
+								<h4>Email: </h4>
+								<p>{{ Model.ContentItem.Content.Venue.Email.Text}}</p>
+							</div>
+						</div>
+
+						<div class="contact-info-box">
+							<i class="fa fa-phone">&nbsp;</i>
+							<div class="contact-info-box-content">
+								<h4>Phone: </h4>
+								<p> {{ Model.ContentItem.Content.Venue.Phone.Text}}</p>
+							</div>
+						</div>
+
+					</div><!-- contact info end -->
+				</div><!-- Col end -->
+
+				<div class="col-md-6">
+					<img src= "{{ Model.ContentItem.Content.Venue.Image.Paths | asset_url }}" alt="">
+				</div><!-- Col end -->
+
+			</div><!-- Content row 1 end -->
+
+			<div class="gap-60"></div>
+
+
+			<div id="map" class="map"></div> <!-- Map area -->
+
+				
+			<div class="gap-60"></div>
+
+			<div class="row text-center">
+				<div class="col-md-4">
+					<div class="venu-info-content">
+						<span class="venu-info-img"><img src="/TheConferenceTheme/images/icons/transport.png" alt="" /></span>
+						<h3 class="venu-info-title">Transport</h3>
+						<p class="venu-info-text">Tofu mixtape twee, assumenda quinoa <a href="#"><strong>flexitarian</strong></a> aesthetic artisan vinyl pug. Chambray et Carles cardigan actually.</p>
+						<a href="#" class="venu-info-link">Read More <i class="fa fa-angle-right"></i></a>
+					</div><!-- Venu content end -->
+				</div><!-- Col 1 end -->
+
+				<div class="col-md-4">
+					<div class="venu-info-content">
+						<span class="venu-info-img"><img src="/TheConferenceTheme/images/icons/hotel.png" alt="" /></span>
+						<h3 class="venu-info-title">Hotels</h3>
+						<p class="venu-info-text">Rethoric question, assumenda quinoa <a href="#"><strong>percianto</strong></a> aesthetic artisan vinyl pug. Chambray et Thundercats <a href="#"><strong>Grand Hotel</strong></a> actually.</p>
+						<a href="#" class="venu-info-link">Read More <i class="fa fa-angle-right"></i></a>
+					</div><!-- Venu content end -->
+				</div><!-- Col 2 end -->
+
+				<div class="col-md-4">
+					<div class="venu-info-content">
+						<span class="venu-info-img"><img src="/TheConferenceTheme/images/icons/food.png" alt="" /></span>
+						<h3 class="venu-info-title">Food</h3>
+						<p class="venu-info-text">Incididunt ut labore quinoa <a href="#"><strong>cardigan</strong></a> aesthetic artisan vinyl pug. Chambray et Carles Thundercats <a href="#"><strong>Buffet</strong></a> assumenda.</p>
+						<a href="#" class="venu-info-link">Read More <i class="fa fa-angle-right"></i></a>
+					</div><!-- Venu content end -->
+				</div><!-- Col 3 end -->
+
+			</div><!-- Content row 2 end -->
+
+
+
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->
+
+   <!-- initialize jQuery Library -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.js"></script>
+	<!-- Bootstrap jQuery -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/bootstrap.min.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/waypoints.min.js"></script>
+	<!-- Color box for Popup-->
+	<script type="text/javascript" src="/TheConferenceTheme/js/jquery.colorbox.js"></script>
+	<!-- Smoothscroll -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/smoothscroll.js"></script>
+	<!-- Google Map API Key-->
+	<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
+	<!-- Google Map Plugin-->
+	<script type="text/javascript" src="/TheConferenceTheme/js/gmap3.js"></script>
+	<!-- Template custom -->
+	<script type="text/javascript" src="/TheConferenceTheme/js/custom.js"></script>

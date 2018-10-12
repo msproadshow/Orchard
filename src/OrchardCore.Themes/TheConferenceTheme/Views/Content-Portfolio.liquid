@@ -1,0 +1,16 @@
+<article>
+    <header>
+        {{ Model.Header.TitlePart | shape_render }}
+        {% shape_remove_item Model.Header "TitlePart" %}
+
+        {{ Model.Header | shape_render }}
+    </header>
+
+        {{ Model.Content["Project-Url"] | shape_render }}
+        {% shape_remove_item Model.Content "Project-Url" %}
+
+        {{ Model.Content.MarkdownPart | shape_render }}
+        {% shape_remove_item Model.Content "MarkdownPart" %}
+
+        {{ Model.Content | shape_render }}
+</article>
